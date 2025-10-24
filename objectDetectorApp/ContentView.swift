@@ -6,16 +6,15 @@
 //
 
 import SwiftUI
-
+import AVFoundation
 struct ContentView: View {
     @StateObject private var cameraManager = CameraManager()
     var body: some View {
         
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack {
+            
+            CameraPreviewView(previewLayer: cameraManager.previewLayer)
+                .ignoresSafeArea(.all)
             
         
         }
@@ -27,6 +26,29 @@ struct ContentView: View {
     }
         
     
+}
+
+struct CameraPreviewView: UIViewRepresentable {
+    let previewLayer: AVCaptureVideoPreviewLayer?
+    
+    func makeUIView(context: Context) -> UIView {
+        let v = UIView()
+        v.backgroundColor = .black
+        return v
+    }
+    
+    func updateUIView(_ uiView: UIView, context: Context) {
+        guard let layer = previewLayer else {
+            
+            return
+        }
+        if layer.superlayer !== uiView.layer {
+            uiView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+            uiView.layer.addSublayer(layer)
+            
+        }
+        layer.frame = uiView.bounds
+    }
 }
 
 #Preview {
