@@ -46,11 +46,22 @@ class CameraManager: NSObject, ObservableObject{
                 print("camera could not add output")
             }
             
+            
+            
+            
             if previewLayer == nil {
                 let layer = AVCaptureVideoPreviewLayer(session: session)
                 layer.videoGravity = .resizeAspectFill
                 previewLayer = layer
                 print("[Camera] Preview layer created")
+            }
+            
+            
+            if let connection = videoOuput.connection(with: .video), connection.isVideoOrientationSupported {
+                connection.videoOrientation = .portrait
+                print("[Camera] Connection orientation set to portrait")
+            } else {
+                print("[Camera] No video connection or orientation not supported")
             }
         
             

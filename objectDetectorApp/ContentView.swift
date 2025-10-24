@@ -15,10 +15,9 @@ struct ContentView: View {
             
             CameraPreviewView(previewLayer: cameraManager.previewLayer)
                 .ignoresSafeArea(.all)
-            
         
         }
-        .padding()
+        
         .onAppear{
             cameraManager.start()
         }
