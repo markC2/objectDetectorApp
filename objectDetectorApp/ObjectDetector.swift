@@ -28,15 +28,13 @@ class ObjectDetector{
                 guard let results = request.results as? [VNRecognizedObjectObservation] else{
                     return
                 }
-                
                 self.processResults(results)
             }
-            
             requests = [objectRecogition]
+            
         } catch{
             print("vision setup error: \(error.localizedDescription)")
         }
-        
     }
     
     func detectObjects(in pixelBuffer: CVPixelBuffer) {
@@ -56,8 +54,6 @@ class ObjectDetector{
             let boundingBox = observation.boundingBox
             
             return DetectedObject(label: label, confidence: confidence, boundingBox: boundingBox)
-            
-            
             
         }
         
