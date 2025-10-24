@@ -8,7 +8,7 @@
 import SwiftUI
 import AVFoundation
 struct ContentView: View {
-      @StateObject private var vm = ViewModel()
+      @StateObject private var vm = DetectionViewModel()
     
     var body: some View {
         ZStack {

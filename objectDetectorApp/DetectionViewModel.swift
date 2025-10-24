@@ -1,5 +1,5 @@
 //
-//  ViewModel.swift
+//  DetectionViewModel.swift
 //  objectDetectorApp
 //
 //  Created by Mark Carey on 24/10/2025.
@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import AVFoundation
 
-class ViewModel: ObservableObject{
+class DetectionViewModel: ObservableObject{
     
     @Published var detectedObjects = [DetectedObject]()
     var previewLayer: AVCaptureVideoPreviewLayer? { camera.previewLayer }
