@@ -1,0 +1,40 @@
+//
+//  ObjectDetector.swift
+//  objectDetectorApp
+//
+//  Created by Mark Carey on 24/10/2025.
+//
+
+import Foundation
+import Vision
+import CoreML
+
+class ObjectDetector{
+    
+    private var requests = [VNRequest]()
+    
+    init(){
+        setupVision()
+    }
+    
+    private func setupVision(){
+        guard let modelURL = Bundle.main.url(forResource: "YOLOv3", withExtension: "mlmodelc") else{
+            return
+        }
+        
+        do{
+            let visionModel = try VNCoreMLModel(for: MLModel(contentsOf: modelURL))
+            let objectRecogition = VNCoreMLRequest(model: visionModel) { request, error in
+                guard let results = request.results as? [VNRecognizedObjectObservation] else{
+                    return
+                }
+                
+//                self.processResults(results)
+            }
+            
+            requests = [objectRecogition]
+        } catch{
+            print("vision setup error: \(error.localizedDescription)")
+        }
+    }
+}
