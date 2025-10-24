@@ -17,3 +17,6 @@ struct DetectedObject: Identifiable {
     
 }
 
+extension Notification.Name {
+    static let detectedObjectsUpdated = Notification.Name("detectedObjectsUpdated")
+}

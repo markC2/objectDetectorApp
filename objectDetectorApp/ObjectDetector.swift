@@ -57,6 +57,13 @@ class ObjectDetector{
             
             return DetectedObject(label: label, confidence: confidence, boundingBox: boundingBox)
             
+            
+            
+        }
+        
+        //after processing update ui via notification
+        DispatchQueue.main.async{
+            NotificationCenter.default.post(name: .detectedObjectsUpdated, object: detectedObjects)
         }
     }
     
