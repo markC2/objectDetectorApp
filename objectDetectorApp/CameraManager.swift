@@ -14,6 +14,8 @@ class CameraManager: NSObject, ObservableObject{
     private let videoOuput = AVCaptureVideoDataOutput()
     private let queue = DispatchQueue(label: "camera-queue")
     
+    private let objectDetector = ObjectDetector()
+    
     func setupCamera(){
         session.beginConfiguration()
         session.sessionPreset = .high //qaulity of video captured
@@ -113,8 +115,10 @@ class CameraManager: NSObject, ObservableObject{
 extension CameraManager: AVCaptureVideoDataOutputSampleBufferDelegate{
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else{
             return
         }
+        objectDetector.detectObjects(in: pixelBuffer)
     }
 }
