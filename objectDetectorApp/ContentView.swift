@@ -15,6 +15,10 @@ struct ContentView: View {
         ZStack {
             CameraPreviewView(previewLayer: cameraManager.previewLayer)
                 .ignoresSafeArea(.all)
+            
+            ForEach(detectedObjects) { object in
+                BoundingBoxView(object: object)
+            }
         }
         .onAppear{
             cameraManager.start()
