@@ -36,5 +36,18 @@ class ObjectDetector{
         } catch{
             print("vision setup error: \(error.localizedDescription)")
         }
+        
     }
+    
+    func detectObjects(in pixelBuffer: CVPixelBuffer) {
+        let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .right)
+        
+        do {
+            try handler.perform(requests)
+        } catch{
+            print("detection error\(error.localizedDescription)")
+        }
+    }
+    
+   
 }
