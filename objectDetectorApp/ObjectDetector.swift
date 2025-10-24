@@ -18,7 +18,7 @@ class ObjectDetector{
     }
     
     private func setupVision(){
-        guard let modelURL = Bundle.main.url(forResource: "YOLOv3Tiny", withExtension: "mlmodelc") else{
+        guard let modelURL = Bundle.main.url(forResource: "YOLOv8n", withExtension: "mlmodelc") else{
             return
         }
         
