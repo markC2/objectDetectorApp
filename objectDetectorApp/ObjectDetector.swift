@@ -29,7 +29,7 @@ class ObjectDetector{
                     return
                 }
                 
-//                self.processResults(results)
+                self.processResults(results)
             }
             
             requests = [objectRecogition]
@@ -46,6 +46,17 @@ class ObjectDetector{
             try handler.perform(requests)
         } catch{
             print("detection error\(error.localizedDescription)")
+        }
+    }
+    
+    func processResults(_ results: [VNRecognizedObjectObservation]){
+        let detectedObjects = results.map{ observation -> DetectedObject in
+            let label = observation.labels.first?.identifier ?? "Unknown"
+            let confidence = observation.confidence
+            let boundingBox = observation.boundingBox
+            
+            return DetectedObject(label: label, confidence: confidence, boundingBox: boundingBox)
+            
         }
     }
     
